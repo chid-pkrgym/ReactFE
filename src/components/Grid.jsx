@@ -70,7 +70,10 @@ const SEATS = [
   },
 ];
 
-function Seats({ seats }) {
+// Clockwise from SB: SB(2) → BB(3) → UTG+1(5) → UTG(4) → CO(6) → BTN(1)
+const DEAL_ORDER = { 2: 0, 3: 1, 5: 2, 4: 3, 6: 4, 1: 5 };
+
+function Seats({ seats, dealt }) {
   const top = seats.filter((s) => [1, 2].includes(s.id));
   const left = seats.find((s) => s.id === 6);
   const right = seats.find((s) => s.id === 3);
@@ -83,40 +86,40 @@ function Seats({ seats }) {
         className="flex justify-around pt-2 md:pt-4"
       >
         {top.map((s) => (
-          <Seat key={s.id} {...s} />
+          <Seat key={s.id} {...s} dealt={dealt} dealIndex={DEAL_ORDER[s.id]} />
         ))}
       </div>
       <div
         style={{ gridColumn: 1, gridRow: 2 }}
         className="flex items-center justify-end pr-4 md:pr-8 lg:pr-12 xl:pr-14 2xl:pr-16"
       >
-        {left && <Seat {...left} />}
+        {left && <Seat {...left} dealt={dealt} dealIndex={DEAL_ORDER[left.id]} />}
       </div>
       <div
         style={{ gridColumn: 3, gridRow: 2 }}
         className="flex items-center justify-start pl-4 md:pl-8 lg:pl-12 xl:pl-14 2xl:pl-16"
       >
-        {right && <Seat {...right} />}
+        {right && <Seat {...right} dealt={dealt} dealIndex={DEAL_ORDER[right.id]} />}
       </div>
       <div
         style={{ gridColumn: 2, gridRow: 3 }}
         className="flex justify-around pb-2 md:pb-4"
       >
         {bottom.map((s) => (
-          <Seat key={s.id} {...s} />
+          <Seat key={s.id} {...s} dealt={dealt} dealIndex={DEAL_ORDER[s.id]} />
         ))}
       </div>
     </>
   );
 }
 
-function Grid({ seats = SEATS }) {
+function Grid({ seats = SEATS, dealt = false }) {
   return (
     <div
       id="grid"
       className="grid grid-cols-[1fr_auto_1fr] grid-rows-[1fr_35%_1fr] w-full h-full"
     >
-      <Seats seats={seats} />
+      <Seats seats={seats} dealt={dealt} />
       <div
         style={{ gridColumn: 2, gridRow: 2 }}
         className="flex items-center justify-center h-full w-full"

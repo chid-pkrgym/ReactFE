@@ -130,14 +130,24 @@ function HoleCard({ rank, suit }) {
   );
 }
 
+import { motion } from "motion/react";
+
+const SPRING = { type: "spring", duration: 0.9, bounce: 0.25 };
+const STAGGER = 0.14;
+const ROUND_GAP = 0.19;
+
 function Seat({
   name,
   initial,
   variant = "cool",
   pos = "—",
   holeCards = [null, null],
+  dealt = false,
+  dealIndex = 0,
 }) {
   const v = VARIANT[variant];
+  const d0 = dealIndex * (ROUND_GAP + STAGGER);
+  const d1 = d0 + ROUND_GAP;
 
   return (
     <div id="seat" className="flex flex-col items-center justify-center">
@@ -146,12 +156,22 @@ function Seat({
         id="hole-cards"
         className="flex items-end mb-[-12px] sm:mb-[-14px] md:mb-[-16px] lg:mb-[-20px] xl:mb-[-24px] 2xl:mb-[-28px]"
       >
-        <div className="h-12 sm:h-14 md:h-16 lg:h-18 xl:h-20 2xl:h-22 aspect-[110/154] origin-bottom -rotate-[9deg]">
+        <motion.div
+          className="h-12 sm:h-14 md:h-16 lg:h-18 xl:h-20 2xl:h-22 aspect-[110/154] origin-bottom -rotate-[9deg]"
+          initial={{ y: 48, opacity: 0 }}
+          animate={dealt ? { y: 0, opacity: 1 } : { y: 48, opacity: 0 }}
+          transition={dealt ? { ...SPRING, delay: d0 } : { duration: 0.15 }}
+        >
           <HoleCard rank={holeCards[0]?.rank} suit={holeCards[0]?.suit} />
-        </div>
-        <div className="h-12 sm:h-14 md:h-16 lg:h-18 xl:h-20 2xl:h-22 aspect-[110/154] origin-bottom rotate-[5deg] -ml-[14px] sm:-ml-[16px] md:-ml-[18px] lg:-ml-[23px] xl:-ml-[30px] 2xl:-ml-[32px]">
+        </motion.div>
+        <motion.div
+          className="h-12 sm:h-14 md:h-16 lg:h-18 xl:h-20 2xl:h-22 aspect-[110/154] origin-bottom rotate-[5deg] -ml-[14px] sm:-ml-[16px] md:-ml-[18px] lg:-ml-[23px] xl:-ml-[30px] 2xl:-ml-[32px]"
+          initial={{ y: 48, opacity: 0 }}
+          animate={dealt ? { y: 0, opacity: 1 } : { y: 48, opacity: 0 }}
+          transition={dealt ? { ...SPRING, delay: d1 } : { duration: 0.15 }}
+        >
           <HoleCard rank={holeCards[1]?.rank} suit={holeCards[1]?.suit} />
-        </div>
+        </motion.div>
       </div>
 
       {/* Badge — z-10 so it renders on top of card bottoms */}
