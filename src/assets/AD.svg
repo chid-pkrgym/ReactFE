@@ -1,0 +1,16 @@
+<svg width="220" height="308" viewBox="0 0 110 154" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Aldrich&amp;display=swap');
+      text { font-family: "Aldrich", sans-serif; }
+    </style>
+  </defs>
+  <rect x="0.5" y="0.5" width="109" height="153" rx="6" fill="#1C1416" stroke="#332226"/>
+  <g transform="rotate(180 55 77)">
+    <text x="10" y="26" font-size="20" font-weight="500" fill="#D25E65">A</text>
+  </g>
+  <text x="10" y="26" font-size="20" font-weight="500" fill="#D25E65">A</text>
+  <g transform="translate(55,77) scale(0.5) translate(-60,-60)">
+    <polygon points="60,104 16,60 60,16 104,60" fill="#D25E65"/>
+  </g>
+</svg>

@@ -1,0 +1,9 @@
+<svg width="260" height="260" viewBox="0 0 260 260" xmlns="http://www.w3.org/2000/svg">
+  <rect width="260" height="260" fill="#191919"/>
+  <g transform="translate(108,138) rotate(-12)">
+    <rect x="-50" y="-70" width="100" height="140" rx="14" fill="#ffffff" stroke="#191919" stroke-width="10"/>
+  </g>
+  <g transform="translate(152,122) rotate(10)">
+    <rect x="-50" y="-70" width="100" height="140" rx="14" fill="#ffffff" stroke="#191919" stroke-width="10"/>
+  </g>
+</svg>
