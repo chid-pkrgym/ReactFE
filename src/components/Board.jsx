@@ -1,9 +1,14 @@
-import asSvg from "../assets/AS.svg";
-import ahSvg from "../assets/AH.svg";
-import acSvg from "../assets/AC.svg";
-import adSvg from "../assets/AD.svg";
+import Card from "./Card";
 
-const CARDS = [asSvg, ahSvg, acSvg, adSvg];
+const CARD_SIZE =
+  "h-20 sm:h-22 md:h-24 lg:h-26 xl:h-28 2xl:h-28 aspect-[110/154]";
+
+const CARDS = [
+  { rank: "A", suit: "spade" },
+  { rank: "A", suit: "heart" },
+  { rank: "A", suit: "club" },
+  { rank: "A", suit: "diamond" },
+];
 
 function Board() {
   return (
@@ -15,15 +20,10 @@ function Board() {
           "repeating-linear-gradient(45deg, rgba(237,237,237,0.06) 0 1px, transparent 1px 10px) #050505",
       }}
     >
-      {CARDS.map((src, i) => (
-        <img
-          key={i}
-          src={src}
-          alt=""
-          className="h-20 sm:h-22 md:h-24 lg:h-26 xl:h-28 2xl:h-28 w-auto"
-        />
+      {CARDS.map((c, i) => (
+        <Card key={i} rank={c.rank} suit={c.suit} className={CARD_SIZE} />
       ))}
-      <div className="h-20 sm:h-22 md:h-24 lg:h-26 xl:h-28 2xl:h-28 aspect-[110/154] rounded border border-dashed border-white/10" />
+      <Card className={CARD_SIZE} />
     </div>
   );
 }

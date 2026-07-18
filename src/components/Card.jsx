@@ -50,11 +50,49 @@ function DiamondSuit({ color }) {
   );
 }
 
-function Card({ rank, suit }) {
+function CardBack() {
+  return (
+    <svg
+      className="block w-full h-full"
+      viewBox="0 0 110 154"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <rect
+        x="0.5"
+        y="0.5"
+        width="109"
+        height="153"
+        rx="6"
+        fill="#0d0f1a"
+        stroke="#252840"
+      />
+      <rect
+        x="8"
+        y="8"
+        width="94"
+        height="138"
+        rx="4"
+        fill="none"
+        stroke="#2e3260"
+        strokeWidth="0.8"
+        strokeOpacity="0.5"
+      />
+    </svg>
+  );
+}
+
+function Card({ rank, suit, size = 24, className = SLOT, variant = "outline" }) {
   if (!suit || !rank) {
+    if (variant === "back") {
+      return (
+        <div className={className}>
+          <CardBack />
+        </div>
+      );
+    }
     return (
       <div
-        className={`${SLOT} border border-dashed border-[#2a2a2a] rounded`}
+        className={`${className} border border-dashed border-[#2a2a2a] rounded`}
       />
     );
   }
@@ -62,7 +100,7 @@ function Card({ rank, suit }) {
   const { bg, stroke, color } = SUIT_CONFIG[suit];
 
   return (
-    <div className={SLOT}>
+    <div className={className}>
       <svg
         className="block w-full h-full"
         viewBox="0 0 110 154"
@@ -82,7 +120,7 @@ function Card({ rank, suit }) {
             x="10"
             y="26"
             fontFamily="Aldrich"
-            fontSize="24"
+            fontSize={size}
             fontWeight="500"
             fill={color}
           >
@@ -93,7 +131,7 @@ function Card({ rank, suit }) {
           x="10"
           y="26"
           fontFamily="Aldrich"
-          fontSize="24"
+          fontSize={size}
           fontWeight="500"
           fill={color}
         >

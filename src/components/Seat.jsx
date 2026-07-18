@@ -3,134 +3,8 @@ const VARIANT = {
   warm: { ring: "#d25e65", glow: "rgba(210,94,101,0.1)" },
 };
 
-const SUIT = {
-  spade: { bg: "#161616", stroke: "#2A2A2A", color: "#EDEDED" },
-  heart: { bg: "#1C1416", stroke: "#332226", color: "#D25E65" },
-  club: { bg: "#161616", stroke: "#2A2A2A", color: "#EDEDED" },
-  diamond: { bg: "#1C1416", stroke: "#332226", color: "#D25E65" },
-};
-
-function SpadeSuit({ color }) {
-  return (
-    <g transform="translate(55,77) scale(0.5,0.422) translate(-60,-60)">
-      <polygon
-        points="60,13 16,90.67 20,94.67 45,94.67 60,68.69 75,94.67 100,94.67 104,90.67"
-        fill={color}
-      />
-      <polygon points="60,81.89 75,107.87 45,107.87" fill={color} />
-    </g>
-  );
-}
-
-function HeartSuit({ color }) {
-  return (
-    <g transform="translate(55,77) scale(0.5,0.54) translate(-60,-60)">
-      <polygon
-        points="60,94.8 104,50.8 78.4,25.2 60,43.6 41.6,25.2 16,50.8"
-        fill={color}
-      />
-    </g>
-  );
-}
-
-function ClubSuit({ color, bg }) {
-  return (
-    <g transform="translate(55,77) scale(0.54,0.5) translate(-60,-60)">
-      <circle cx="60" cy="38.5" r="20" fill={color} />
-      <circle cx="42.68" cy="68.5" r="20" fill={color} />
-      <circle cx="77.32" cy="68.5" r="20" fill={color} />
-      <polygon points="38,101.5 60,63.39 82,101.5" fill={bg} />
-      <polygon points="45,101.5 60,75.52 75,101.5" fill={color} />
-    </g>
-  );
-}
-
-function DiamondSuit({ color }) {
-  return (
-    <g transform="translate(55,77) scale(0.5) translate(-60,-60)">
-      <polygon points="60,104 16,60 60,16 104,60" fill={color} />
-    </g>
-  );
-}
-
-function HoleCard({ rank, suit }) {
-  if (!rank || !suit) {
-    return (
-      <svg
-        className="block w-full h-full"
-        viewBox="0 0 110 154"
-        xmlns="http://www.w3.org/2000/svg"
-      >
-        <rect
-          x="0.5"
-          y="0.5"
-          width="109"
-          height="153"
-          rx="6"
-          fill="#0d0f1a"
-          stroke="#252840"
-        />
-        <rect
-          x="8"
-          y="8"
-          width="94"
-          height="138"
-          rx="4"
-          fill="none"
-          stroke="#2e3260"
-          strokeWidth="0.8"
-          strokeOpacity="0.5"
-        />
-      </svg>
-    );
-  }
-  const { bg, stroke, color } = SUIT[suit];
-  return (
-    <svg
-      className="block w-full h-full"
-      viewBox="0 0 110 154"
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <rect
-        x="0.5"
-        y="0.5"
-        width="109"
-        height="153"
-        rx="6"
-        fill={bg}
-        stroke={stroke}
-      />
-      <g transform="rotate(180 55 77)">
-        <text
-          x="10"
-          y="26"
-          fontFamily="Aldrich"
-          fontSize="20"
-          fontWeight="500"
-          fill={color}
-        >
-          {rank}
-        </text>
-      </g>
-      <text
-        x="10"
-        y="26"
-        fontFamily="Aldrich"
-        fontSize="20"
-        fontWeight="500"
-        fill={color}
-      >
-        {rank}
-      </text>
-      {suit === "spade" && <SpadeSuit color={color} />}
-      {suit === "heart" && <HeartSuit color={color} />}
-      {suit === "club" && <ClubSuit color={color} bg={bg} />}
-      {suit === "diamond" && <DiamondSuit color={color} />}
-    </svg>
-  );
-}
-
 import { motion } from "motion/react";
+import Card from "./Card";
 
 const SPRING = { type: "spring", duration: 0.9, bounce: 0.25 };
 const STAGGER = 0.14;
@@ -162,7 +36,13 @@ function Seat({
           animate={dealt ? { y: 0, opacity: 1 } : { y: 48, opacity: 0 }}
           transition={dealt ? { ...SPRING, delay: d0 } : { duration: 0.15 }}
         >
-          <HoleCard rank={holeCards[0]?.rank} suit={holeCards[0]?.suit} />
+          <Card
+            rank={holeCards[0]?.rank}
+            suit={holeCards[0]?.suit}
+            size={20}
+            className="block w-full h-full"
+            variant="back"
+          />
         </motion.div>
         <motion.div
           className="h-12 sm:h-14 md:h-16 lg:h-18 xl:h-20 2xl:h-22 aspect-[110/154] origin-bottom rotate-[5deg] -ml-[14px] sm:-ml-[16px] md:-ml-[18px] lg:-ml-[23px] xl:-ml-[30px] 2xl:-ml-[32px]"
@@ -170,7 +50,13 @@ function Seat({
           animate={dealt ? { y: 0, opacity: 1 } : { y: 48, opacity: 0 }}
           transition={dealt ? { ...SPRING, delay: d1 } : { duration: 0.15 }}
         >
-          <HoleCard rank={holeCards[1]?.rank} suit={holeCards[1]?.suit} />
+          <Card
+            rank={holeCards[1]?.rank}
+            suit={holeCards[1]?.suit}
+            size={20}
+            className="block w-full h-full"
+            variant="back"
+          />
         </motion.div>
       </div>
 
