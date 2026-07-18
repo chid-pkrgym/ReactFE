@@ -1,0 +1,7 @@
+{
+  "hole_cards": ["2D,AH", "AD,QD", "TS,KH", "4C,QC", "5C,JC", "9H,3D"],
+  "flop": ["High Card", "Flush", "Two Pair", "High Card", "High Card", "High Card"],
+  "turn": ["High Card", "Flush", "Two Pair", "High Card", "High Card", "Pair"],
+  "river": ["Flush", "Royal Flush", "Two Pair", "Straight", "Pair", "Flush"],
+  "best_hand": ["KD,JD,TD,6D,2D", "AD,KD,QD,JD,TD", "KH,KD,TS,TD,6D", "KD,QC,JD,TD,9C", "JC,JD,TD,6D,5C", "KD,JD,TD,6D,3D"]
+}

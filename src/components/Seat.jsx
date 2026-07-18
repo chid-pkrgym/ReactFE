@@ -1,10 +1,8 @@
-const VARIANT = {
-  cool: { ring: "#9fa1ff", glow: "rgba(159,161,255,0.1)" },
-  warm: { ring: "#d25e65", glow: "rgba(210,94,101,0.1)" },
-};
+const BADGE = { ring: "#9fa1ff", glow: "rgba(159,161,255,0.1)" };
 
 import { motion } from "motion/react";
 import Card from "./Card";
+import { Street } from "../constants/street";
 
 const SPRING = { type: "spring", duration: 0.9, bounce: 0.25 };
 const STAGGER = 0.14;
@@ -13,13 +11,13 @@ const ROUND_GAP = 0.19;
 function Seat({
   name,
   initial,
-  variant = "cool",
   pos = "—",
   holeCards = [null, null],
-  dealt = false,
+  street = Street.NEW,
   dealIndex = 0,
+  onDealComplete,
 }) {
-  const v = VARIANT[variant];
+  const dealt = street !== Street.NEW;
   const d0 = dealIndex * (ROUND_GAP + STAGGER);
   const d1 = d0 + ROUND_GAP;
 
@@ -39,7 +37,7 @@ function Seat({
           <Card
             rank={holeCards[0]?.rank}
             suit={holeCards[0]?.suit}
-            size={20}
+            isHoleCard
             className="block w-full h-full"
             variant="back"
           />
@@ -49,11 +47,14 @@ function Seat({
           initial={{ y: 48, opacity: 0 }}
           animate={dealt ? { y: 0, opacity: 1 } : { y: 48, opacity: 0 }}
           transition={dealt ? { ...SPRING, delay: d1 } : { duration: 0.15 }}
+          onAnimationComplete={() => {
+            if (dealt) onDealComplete?.();
+          }}
         >
           <Card
             rank={holeCards[1]?.rank}
             suit={holeCards[1]?.suit}
-            size={20}
+            isHoleCard
             className="block w-full h-full"
             variant="back"
           />
@@ -67,15 +68,15 @@ function Seat({
         style={{
           background: "rgba(6,6,8,0.9)",
           border: "1px solid rgba(255,255,255,0.07)",
-          boxShadow: `0 0 0 1px ${v.glow}, inset 0 1px 0 rgba(255,255,255,0.03)`,
+          boxShadow: `0 0 0 1px ${BADGE.glow}, inset 0 1px 0 rgba(255,255,255,0.03)`,
         }}
       >
         <div
           className="w-7 h-7 rounded-full shrink-0 flex items-center justify-center text-[12px] [font-family:var(--pt-font-display)]"
           style={{
-            background: v.glow,
-            border: `1.5px solid ${v.ring}`,
-            color: v.ring,
+            background: BADGE.glow,
+            border: `1.5px solid ${BADGE.ring}`,
+            color: BADGE.ring,
           }}
         >
           {initial}

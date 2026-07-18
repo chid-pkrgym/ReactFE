@@ -6,6 +6,8 @@ const SUIT_CONFIG = {
 };
 
 const SLOT = "flex-1 min-w-0 aspect-[110/154]";
+const RANK_SIZE = 20;
+const HOLE_CARD_RANK_SIZE = 24;
 
 function SpadeSuit({ color }) {
   return (
@@ -81,7 +83,15 @@ function CardBack() {
   );
 }
 
-function Card({ rank, suit, size = 24, className = SLOT, variant = "outline" }) {
+function Card({
+  rank,
+  suit,
+  isHoleCard = false,
+  className = SLOT,
+  variant = "outline",
+}) {
+  const size = isHoleCard ? HOLE_CARD_RANK_SIZE : RANK_SIZE;
+
   if (!suit || !rank) {
     if (variant === "back") {
       return (

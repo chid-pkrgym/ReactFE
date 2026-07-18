@@ -1,0 +1,6 @@
+{
+  "hole_cards": ["8H,8D", "4H,JS", "AD,TC", "3D,AC", "9D,9S", "KH,AH"],
+  "flop": ["Three of a Kind", "High Card", "High Card", "High Card", "Three of a Kind", "High Card"],
+  "turn": ["Full House", "Pair", "Pair", "Pair", "Four of a Kind", "Pair"],
+  "river": ["Full House", "Two Pair", "Pair", "Pair", "Four of a Kind", "Flush"]
+}
